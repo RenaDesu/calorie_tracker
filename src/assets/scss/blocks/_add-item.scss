@@ -1,0 +1,40 @@
+.add-item {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(10px);
+
+        margin-bottom: rem(10px);
+    }
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(5px);
+    }
+
+    &__input {
+        padding: rem(5px);
+
+        border: rem(2px) solid $medium-purple;
+        border-radius: rem($border-radius-medium);
+        transition: outline 0.1s ease;
+
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus-visible {
+            outline: rem(2px) solid $medium-purple;
+        }
+
+        &--date {
+            max-width: rem(130px);
+        }
+
+        &--small {
+            max-width: rem(80px);
+        }
+    }
+}

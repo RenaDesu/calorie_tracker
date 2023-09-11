@@ -13,3 +13,7 @@
 // import myModule from './modules/my-module-function';
 import '../index.html';
 import '../assets/scss/style.scss';
+
+import './modules/set-limit'
+import './modules/localstorage'
+import './modules/add-current-table'

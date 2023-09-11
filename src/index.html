@@ -20,33 +20,78 @@
 
   <main class="page__content content">
     <div class="container">
-      <section class="limit">
-        <h2 class="limit__title title">Лимит калорий</h2>
-        <div class="limit__wrapper">
-          <label class="limit__label">Установите лимит калорий на день
-            <input type="number" name="setlimit">
-            (ккал)
-          </label>
-          <button class="limit__button button" type="button">Установить</button>
-        </div>
-        <p class="limit__total-label">Лимит калорий: <span class="limit__total-value"></span></p>
-      </section>
+      <div class="wrapper wrapper--grid">
+        <section class="limit">
+          <h2 class="limit__title title">Лимит калорий</h2>
+          <div class="limit__wrapper">
+            <label class="limit__label">Установите лимит калорий в день
+              <input class="limit__input" data-setlimit type="number" name="setlimit">
+              (ккал)
+            </label>
+            <button class="limit__button button" data-setlimit-button type="button">Установить</button>
+          </div>
+          <p class="limit__total-label">Лимит калорий: <span class="limit__total-value" data-setlimit-text>не
+              установлен</span></p>
+        </section>
 
-      <section class="add-item">
-        <h2 class="add-item__title title">Добавить продукт</h2>
-        <div class="add-item__container">
-          <label class="add-item__label" for="date">Выберите текущую дату</label>
-          <input class="add-item__input" type="date" name="date" id="date">
-          <label class="add-item__label" for="title">Укажите название продукта</label>
-          <input class="add-item__input" type="text" name="title" id="title">
-          <label class="add-item__label">
-            Укажите калорийность продукта на 100гр
-            <input class="add-item__input" type="number" name="kkal" id="kkal">
-            (ккал)
-          </label>
-        </div>
-        <button class="add-item__button button" type="button">Добавить</button>
-      </section>
+        <section class="add-item">
+          <h2 class="add-item__title title">Добавить продукт</h2>
+          <form class="add-item__container" data-form>
+            <div class="add-item__block">
+              <label class="add-item__label" for="date">Выберите текущую дату</label>
+              <input class="add-item__input add-item__input--date" data-current-date type="date" name="date" id="date">
+            </div>
+            <div class="add-item__block">
+              <label class="add-item__label" for="title">Укажите название продукта</label>
+              <input class="add-item__input" data-product-title type="text" name="title" id="title">
+            </div>
+            <label class="add-item__label">
+              Укажите калорийность продукта на 100гр
+              <input class="add-item__input add-item__input--small" data-product-kcal type="number" name="kcal" id="kcal">
+              (ккал)
+            </label>
+            <label class="add-item__label">
+              Укажите массу продукта
+              <input class="add-item__input add-item__input--small" data-product-weight type="number" name="weight" id="weight">
+              (гр)
+            </label>
+          </form>
+          <button class="add-item__button button" data-add-product type="button">Добавить</button>
+        </section>
+
+        <section class="diagram diagram--hidden">
+          <h2 class="diagram__title title">Диаграмма: текущее потребление калорий</h2>
+          <div class="diagram__illustration">
+          </div>
+        </section>
+
+        <section class="table table--hidden" data-current-table-container>
+          <h2 class="table__title title">Текущее потребление калорий</h2>
+          <table class="table__table" data-current-table>
+            <thead class="table__head">
+              <tr class="table__head-row">
+                <th class="table__head-col">
+                  Название
+                </th>
+                <th class="table__head-col">
+                  ккал/100гр &#9650
+                </th>
+                <th class="table__head-col">
+                  гр
+                </th>
+                <th class="table__head-col">
+                  Итого ккал
+                </th>
+                <th class="table__head-col">
+                  Удалить
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table__body" data-current-table-body>
+            </tbody>
+          </table>
+        </section>
+      </div>
     </div>
   </main>
 
@@ -57,6 +102,18 @@
       </div>
     </div>
   </footer>
+
+  <template id="tr-template">
+    <tr data-tr>
+      <td data-title></td>
+      <td data-kcal></td>
+      <td data-gr></td>
+      <td data-kcal-total></td>
+      <td class="table__delete" data-delete>
+        <button class="button button--icon button--icon-cross" type="button"></button>
+      </td>
+    </tr>
+  </template>
 
   <script src="js/main.js"></script>
 </body>

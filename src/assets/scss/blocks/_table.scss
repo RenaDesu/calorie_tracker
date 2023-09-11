@@ -1,0 +1,21 @@
+.table {
+    grid-column: 1 / -1;
+
+    &--hidden {
+        display: none;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__table {
+        width: 100%;
+
+        text-align: left;
+    }
+
+    &__delete {
+        text-align: center;
+    }
+}

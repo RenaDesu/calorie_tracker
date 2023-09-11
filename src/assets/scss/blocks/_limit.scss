@@ -1,0 +1,33 @@
+.limit {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        column-gap: rem(5px);
+    }
+
+    &__input {
+        padding: rem(5px);
+
+        max-width: rem(80px);
+
+        border: rem(2px) solid $medium-purple;
+        border-radius: rem($border-radius-medium);
+        transition: outline 0.1s ease;
+
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus-visible {
+            outline: rem(2px) solid $medium-purple;
+        }
+    }
+
+    &__total-value {
+        font-size: rem($font-size-big);
+        line-height: rem($line-height-big);
+        font-weight: $font-weight-bold;
+        color: $medium-purple;
+    }
+}
