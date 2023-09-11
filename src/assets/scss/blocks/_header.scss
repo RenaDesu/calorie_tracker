@@ -1,0 +1,23 @@
+.header {
+    height: rem($height-header-desktop);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: $black;
+    background-color: $white;
+    box-shadow: $box-shadow-header;
+
+    &__logo {
+        &-text {
+            font-size: rem(32px);
+            line-height: rem(42px);
+            font-weight: $font-weight-bold;
+
+            color: transparent;
+            background-clip: text;
+            background-image: linear-gradient(to right, #d3a2ef, 50%, #ad43eb);
+        }
+    }
+}

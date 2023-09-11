@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор калорий</title>
+</head>
+
+<body class="page">
+  <h1 class="page__heading">Калькулятор калорий</h1>
+  <header class="page__header header">
+    <div class="container wrapper wrapper--center">
+      <div class="header__logo">
+        <span class="header__logo-text">CalorieTracker</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page__content content">
+    <div class="container">
+      <section class="limit">
+        <h2 class="limit__title title">Лимит калорий</h2>
+        <div class="limit__wrapper">
+          <label class="limit__label">Установите лимит калорий на день
+            <input type="number" name="setlimit">
+            (ккал)
+          </label>
+          <button class="limit__button button" type="button">Установить</button>
+        </div>
+        <p class="limit__total-label">Лимит калорий: <span class="limit__total-value"></span></p>
+      </section>
+
+      <section class="add-item">
+        <h2 class="add-item__title title">Добавить продукт</h2>
+        <div class="add-item__container">
+          <label class="add-item__label" for="date">Выберите текущую дату</label>
+          <input class="add-item__input" type="date" name="date" id="date">
+          <label class="add-item__label" for="title">Укажите название продукта</label>
+          <input class="add-item__input" type="text" name="title" id="title">
+          <label class="add-item__label">
+            Укажите калорийность продукта на 100гр
+            <input class="add-item__input" type="number" name="kkal" id="kkal">
+            (ккал)
+          </label>
+        </div>
+        <button class="add-item__button button" type="button">Добавить</button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page__footer footer">
+    <div class="container">
+      <div class="wrapper wrapper--column">
+        <P class="footer__copyright">© 2023 CalorieTracker</P>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

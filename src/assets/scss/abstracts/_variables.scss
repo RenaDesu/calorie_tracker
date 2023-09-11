@@ -1,0 +1,103 @@
+/**
+* Colors
+*
+* Название переменной конкретного цвета генерируется через сервис: http://chir.ag/projects/name-that-color/.
+* Значение цвета всегда указывается в HEX-формате в нижнем регистре (кроме исключительных случаев).
+*/
+
+$black: #000000;
+$white: #ffffff;
+$medium-purple: #ad43eb;
+$lavender: #c17cea;
+
+/**
+* Fonts
+*/
+$font-size-base: 16px;
+
+$font-path: "../fonts";
+$font-family-default: "Arial",
+"Helvetica",
+sans-serif;
+$font-family-custom: "Roboto";
+$font-family: $font-family-custom,
+$font-family-default;
+
+//text-size
+
+$font-size-huge: 20px;
+$line-height-huge: 30px;
+
+$font-size-big: 18px;
+$line-height-big: 28px;
+
+$font-size-medium: 16px;
+$line-height-medium: 26px;
+
+$font-size-small: 14px;
+$line-height-small: 24px;
+
+$font-size-tiny: 12px;
+$line-height-tiny: 18px;
+
+$font-weight-base: 400;
+$font-weight-bold: 500;
+
+
+//headings-size
+$title-size-big: 36px;
+$title-height-big: 48px;
+$title-size-medium: 30px;
+$title-height-medium: 38px;
+$title-size-small: 24px;
+$title-height-small: 28px;
+
+
+/**
+* Breakpoints
+*/
+// Пример указания медиазапросов, затем можно использовать ее как '@media #{$screen-medium} {...}'
+
+
+/**
+* Layout
+*/
+$width-container: 1240px;
+$gap-container: 20px;
+
+
+/**
+* Sizes
+*/
+$height-header-desktop: 80px;
+
+
+/**
+* Transitions and Animations
+*/
+$transition-duration: 0.3s;
+$transition-duration-fast: 100ms;
+$transition-finction: ease-in-out;
+
+/**
+* Radius
+*/
+$border-radius-small: 2px;
+$border-radius-medium: 5px;
+$border-radius-big: 8px;
+$border-radius-huge: 12px;
+$border-radius-circle: 50%;
+
+
+/**
+* Box-shadows
+*/
+$box-shadow-header: 0 rem(3px) rem(6px) 0 rgba(50,50,50,.3);
+$box-shadow-footer: 0 rem(3px) rem(10px) 0 rgba(0, 0, 0, 0.05);
+$box-shadow-double: 0 rem(3px) rem(10px) 0 rgba(164, 164, 164, 0.03), 0 rem(12px) rem(40px) 0 rgba(0, 0, 0, 0.03);
+$box-shadow-button: 0 rem(3px) rem(6px) 0 rgba(0,0,0,.14);
+
+
+/**
+* Z-indexes
+*/

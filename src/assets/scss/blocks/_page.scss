@@ -1,0 +1,30 @@
+.page {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+
+    &__header {
+        position: fixed;
+        z-index: 50;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+
+    &__heading {
+        @include visually-hidden;
+    }
+
+    &__content {
+        margin-top: rem($height-header-desktop);
+
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__footer {
+        flex-shrink: 0;
+    }
+}

@@ -1,0 +1,14 @@
+.footer {
+    position: relative;
+
+    font-size: rem($font-size-tiny);
+    line-height: rem($line-height-tiny);
+
+    color: $black;
+    background-color: $white;
+    box-shadow: $box-shadow-footer;
+
+    &__copyright {
+        margin: 0;
+    }
+}

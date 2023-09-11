@@ -1,0 +1,44 @@
+.button {
+    display: block;
+
+    padding: rem(5px) rem(20px);
+
+    font-size: rem($font-size-small);
+    line-height: rem($line-height-small);
+
+    color: $white;
+    background-color: $medium-purple;
+    border-radius: rem($border-radius-big);
+
+    cursor: pointer;
+
+    transition: background-color 0.5s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $lavender;
+    }
+
+    &--icon {
+        padding: rem(5px) rem(10px);
+
+        display: flex;
+        align-items: center;
+        column-gap: rem(5px);
+
+        font-size: rem($font-size-small);
+        line-height: rem($line-height-small);
+
+        border-radius: rem($border-radius-big);
+    }
+
+    &--small {
+        padding: rem(3px) rem(7px);
+
+        font-size: rem($font-size-small);
+        line-height: rem($line-height-small);
+
+        border-radius: rem($border-radius-big);
+    }
+}
