@@ -18,4 +18,10 @@
     &__delete {
         text-align: center;
     }
+
+    &__head-col {
+        &--kcal {
+            cursor: pointer;
+        }
+    }
 }

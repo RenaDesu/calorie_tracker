@@ -21,11 +21,12 @@ const diagram = document.querySelector('#diagram');
 const diagramLegend = document.querySelector('#diagram-legend');
 const diagramContainer = document.querySelector('[data-diagram-container]');
 const currentTableContainer = document.querySelector('[data-current-table-body]');
+const kcalTableHead = document.querySelector('[data-head-kcal]');
+const limit = localStorage.getItem('CaloriesLimit');
 
 const todayDate = new Date().toISOString().slice(0, 10);
 //Показ лимита калорий
 function showLimit() {
-    const limit = localStorage.getItem('CaloriesLimit');
     setLimitText.innerText = limit;
 }
 showLimit();
@@ -36,6 +37,7 @@ addProductBtn.addEventListener('click', () => {
     getCurrentData(currentDate.value, productTitle.value, productKcal.value, productWeight.value);
     form.reset();
     drawDiagram();
+    alertLimit();
 });
 //Добавление продукта + запись данных в localStorage
 function getCurrentData(date, title, kcal, weight) {
@@ -114,5 +116,62 @@ window.addEventListener('click', (e) => {
         localStorage.removeItem(`${parent.id}`);
         currentTableContainer.removeChild(parent);
         drawDiagram();
+        alertLimit();
     }
 });
+
+//Сортировка продуктов по калорийности
+kcalTableHead.addEventListener('click', (e) => {
+    const target = e.target;
+    const order = target.dataset.order;
+    let dataArr = [];
+    let text = 'ккал/100гр';
+    
+    for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key) && key.indexOf('Product') !== -1) {
+            let data;
+            data = JSON.parse(localStorage.getItem(key));
+            if (data.date == todayDate) {
+                dataArr.push(data);
+            }
+        }
+    }
+
+    let data;
+    if (order == 'desc') {
+        target.dataset.order = 'asc';
+        data = dataArr.sort((a, b) => parseInt(a.kcal) > parseInt(b.kcal) ? 1 : -1);  
+        text += '&#9660';
+    } else {
+        target.dataset.order = 'desc';
+        data = dataArr.sort((a, b) => parseInt(a.kcal) < parseInt(b.kcal) ? 1 : -1);
+        text += '&#9650';
+    }
+
+    currentTableContainer.innerHTML = '';
+
+    data.forEach((el) => {
+        addCurrentTable(el);
+    });
+
+    target.innerHTML = text;
+});
+
+//Уведомление о превышении лимита калорий
+function alertLimit() {
+    const kcalTotalCols = document.querySelectorAll('[data-kcal-total]');
+    const caloriesArr = [];
+    kcalTotalCols.forEach((el) => {
+    const calories = parseInt(el.innerText);
+    caloriesArr.push(calories);
+    });
+    const calories = caloriesArr.reduce((a,b)=>a+b);
+    if (parseInt(setLimitText.innerText) < calories) {
+        setLimitText.innerText = `${limit} (лимит калорий превышен)`;
+        setLimitText.style.color =  'red';
+    } else {
+        setLimitText.innerText = limit;
+        setLimitText.style.color =  '#ad43eb';
+    }
+}
+alertLimit();
