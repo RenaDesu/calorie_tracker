@@ -1,5 +1,8 @@
 .diagram {
-    grid-column: 1 / -1;
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     &--hidden {
         display: none;

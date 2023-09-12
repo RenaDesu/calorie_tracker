@@ -17,3 +17,5 @@ import '../assets/scss/style.scss';
 import './modules/set-limit'
 import './modules/localstorage'
 import './modules/add-current-table'
+import './modules/pie-chart'
+import './modules/utils'

@@ -9,6 +9,7 @@ export function addCurrentTable(data) {
         tableContainer.classList.remove('table--hidden');
     }
     const trElement = trTemplate.cloneNode(true);
+    trElement.setAttribute('id', `${data.id}`)
     trElement.querySelector('[data-title]').innerText = data.title;
     trElement.querySelector('[data-kcal]').innerText = data.kcal;
     trElement.querySelector('[data-gr]').innerText = data.weight;
