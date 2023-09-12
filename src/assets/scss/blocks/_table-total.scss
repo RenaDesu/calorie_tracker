@@ -1,0 +1,30 @@
+.table-total {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__table {
+        width: 50%;
+
+        text-align: left;
+    }
+
+    &__head-col {
+        &--date {
+            width: 40%;
+        }
+
+        &--kcal {
+            width: 40%;
+        }
+
+        &--del {
+            width: 20%;
+        }
+    }
+}

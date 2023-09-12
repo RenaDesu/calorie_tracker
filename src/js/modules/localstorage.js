@@ -10,6 +10,9 @@ import {
 import {
     Piechart
 } from "./pie-chart";
+import {
+    addTotalTable
+} from "./add-total-table";
 
 const addProductBtn = document.querySelector('[data-add-product]');
 const currentDate = document.querySelector('[data-current-date]');
@@ -23,6 +26,7 @@ const diagramContainer = document.querySelector('[data-diagram-container]');
 const currentTableContainer = document.querySelector('[data-current-table-body]');
 const kcalTableHead = document.querySelector('[data-head-kcal]');
 const limit = localStorage.getItem('CaloriesLimit');
+const totalTableContainer = document.querySelector('[data-total-table-body]');
 
 const todayDate = new Date().toISOString().slice(0, 10);
 //Показ лимита калорий
@@ -38,6 +42,7 @@ addProductBtn.addEventListener('click', () => {
     form.reset();
     drawDiagram();
     alertLimit();
+    location.reload();
 });
 //Добавление продукта + запись данных в localStorage
 function getCurrentData(date, title, kcal, weight) {
@@ -56,7 +61,9 @@ function getCurrentData(date, title, kcal, weight) {
 
     data = JSON.parse(localStorage.getItem(`Product${random_id}`));
 
-    addCurrentTable(data);
+    if (data.date == todayDate) {
+        addCurrentTable(data);
+    }
 }
 //вывод продуктов в таблицу на странице
 for (let key in localStorage) {
@@ -126,7 +133,7 @@ kcalTableHead.addEventListener('click', (e) => {
     const order = target.dataset.order;
     let dataArr = [];
     let text = 'ккал/100гр';
-    
+
     for (let key in localStorage) {
         if (localStorage.hasOwnProperty(key) && key.indexOf('Product') !== -1) {
             let data;
@@ -140,7 +147,7 @@ kcalTableHead.addEventListener('click', (e) => {
     let data;
     if (order == 'desc') {
         target.dataset.order = 'asc';
-        data = dataArr.sort((a, b) => parseInt(a.kcal) > parseInt(b.kcal) ? 1 : -1);  
+        data = dataArr.sort((a, b) => parseInt(a.kcal) > parseInt(b.kcal) ? 1 : -1);
         text += '&#9660';
     } else {
         target.dataset.order = 'desc';
@@ -160,18 +167,84 @@ kcalTableHead.addEventListener('click', (e) => {
 //Уведомление о превышении лимита калорий
 function alertLimit() {
     const kcalTotalCols = document.querySelectorAll('[data-kcal-total]');
+    const totalKcalText = document.querySelector('[data-settotal-text]');
     const caloriesArr = [];
     kcalTotalCols.forEach((el) => {
-    const calories = parseInt(el.innerText);
-    caloriesArr.push(calories);
+        const calories = parseInt(el.innerText);
+        caloriesArr.push(calories);
     });
-    const calories = caloriesArr.reduce((a,b)=>a+b);
+    const calories = caloriesArr.reduce((a, b) => a + b);
     if (parseInt(setLimitText.innerText) < calories) {
         setLimitText.innerText = `${limit} (лимит калорий превышен)`;
-        setLimitText.style.color =  'red';
+        setLimitText.style.color = 'red';
     } else {
         setLimitText.innerText = limit;
-        setLimitText.style.color =  '#ad43eb';
+        setLimitText.style.color = '#ad43eb';
     }
+    totalKcalText.innerText = `${calories} ккал`;
 }
 alertLimit();
+
+//Вывод общей таблицы на страницу
+const dataArr = [];
+for (let key in localStorage) {
+
+    if (localStorage.hasOwnProperty(key) && key.indexOf('Product') !== -1) {
+        let data;
+        data = JSON.parse(localStorage.getItem(key));
+        if (data.date !== todayDate) {
+            if (data.date == data.date) {
+                dataArr.push(data);
+            }
+        }
+    }
+}
+
+let newDataArr = dataArr
+    .sort((a, b) => {
+        if (a.date != b.date) {
+            a.date - b.date
+        }
+    })
+    .reduce((acc, item) => {
+        let key = acc.find(i => i.date == item.date);
+        if (key != null) {
+            key.title.push(item.title);
+            key.kcal.push(item.kcal);
+            key.weight.push(item.weight);
+            key.kcalTotal.push(item.kcalTotal);
+            key.id.push(item.id);
+        } else {
+            acc.push({
+                date: item.date,
+                title: [item.title],
+                kcal: [item.kcal],
+                weight: [item.weight],
+                kcalTotal: [item.kcalTotal],
+                id: [item.id],
+            });
+        }
+        return acc;
+    }, []);
+
+newDataArr.forEach((item, i) => {
+    item.kcalTotal = item.kcalTotal.reduce((a, b) => parseInt(a) + parseInt(b));
+    item.masterID = i;
+    addTotalTable(item);
+});
+
+//Удаление из общей таблицы
+window.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.hasAttribute('data-total-btn-delete')) {
+        const parent = target.closest('.table-total__row');
+        newDataArr.forEach((el) => {
+            if (parent.id == el.masterID) {
+                el.id.forEach((i) => {
+                    localStorage.removeItem(`${i}`);
+                });
+                totalTableContainer.removeChild(parent);
+            }
+        });
+    }
+});

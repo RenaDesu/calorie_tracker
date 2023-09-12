@@ -32,6 +32,7 @@
           </div>
           <p class="limit__total-label">Лимит калорий: <span class="limit__total-value" data-setlimit-text>не
               установлен</span></p>
+              <p class="limit__total-label">Потреблено калорий сегодня: <span class="limit__total-value" data-settotal-text></span></p>
         </section>
 
         <section class="add-item">
@@ -93,6 +94,27 @@
             </tbody>
           </table>
         </section>
+
+        <section class="table-total" data-total-table-container>
+          <h2 class="table-total__title title">Потребление калорий в предыдущие дни</h2>
+          <table class="table-total__table" data-total-table>
+            <thead class="table-total__head">
+              <tr class="table-total__head-row">
+                <th class="table-total__head-col table-total__head-col--date">
+                  Дата
+                </th>
+                <th class="table-total__head-col table-total__head-col--kcal">
+                  ккал
+                </th>
+                <th class="table-total__head-col table-total__head-col--del">
+                  Удалить
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table-total__body" data-total-table-body>
+            </tbody>
+          </table>
+        </section>
       </div>
     </div>
   </main>
@@ -113,6 +135,16 @@
       <td data-kcal-total></td>
       <td class="table__delete" data-delete>
         <button class="button button--icon button--icon-cross" data-delete-current type="button"></button>
+      </td>
+    </tr>
+  </template>
+
+  <template id="tr-total-template">
+    <tr class="table-total__row" data-total-tr>
+      <td data-total-date></td>
+      <td data-total-kcal></td>
+      <td class="table-total__delete" data-total-delete>
+        <button class="button button--icon button--icon-cross" data-total-btn-delete type="button"></button>
       </td>
     </tr>
   </template>
