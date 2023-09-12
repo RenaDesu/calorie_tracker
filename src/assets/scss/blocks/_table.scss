@@ -23,5 +23,33 @@
         &--kcal {
             cursor: pointer;
         }
+
+        &--filter {
+            max-width: rem(180px);
+        }
+    }
+
+    &__input {
+        max-width: rem(170px);
+
+        padding: rem(5px);
+
+        border: rem(1px) solid $medium-purple;
+        border-radius: rem($border-radius-medium);
+        transition: outline 0.1s ease;
+
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus-visible {
+            outline: rem(1px) solid $medium-purple;
+        }
+
+        &::placeholder {
+            font-size: rem($font-size-tiny);
+            line-height: rem($line-height-tiny);
+        }
     }
 }
