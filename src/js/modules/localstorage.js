@@ -169,19 +169,22 @@ function alertLimit() {
     const kcalTotalCols = document.querySelectorAll('[data-kcal-total]');
     const totalKcalText = document.querySelector('[data-settotal-text]');
     const caloriesArr = [];
-    kcalTotalCols.forEach((el) => {
-        const calories = parseInt(el.innerText);
-        caloriesArr.push(calories);
-    });
-    const calories = caloriesArr.reduce((a, b) => a + b);
-    if (parseInt(setLimitText.innerText) < calories) {
-        setLimitText.innerText = `${limit} (лимит калорий превышен)`;
-        setLimitText.style.color = 'red';
-    } else {
-        setLimitText.innerText = limit;
-        setLimitText.style.color = '#ad43eb';
+    if (kcalTotalCols.length != 0) {
+        kcalTotalCols.forEach((el) => {
+            const calories = parseInt(el.innerText);
+            caloriesArr.push(calories);
+        });
+        const calories = caloriesArr.reduce((a, b) => a + b);
+        if (parseInt(setLimitText.innerText) < calories) {
+            setLimitText.innerText = `${limit} (лимит калорий превышен)`;
+            setLimitText.style.color = 'red';
+        } else {
+            setLimitText.innerText = limit;
+            setLimitText.style.color = '#ad43eb';
+        }
+        totalKcalText.innerText = `${calories} ккал`;
     }
-    totalKcalText.innerText = `${calories} ккал`;
+   
 }
 alertLimit();
 
