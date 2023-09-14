@@ -13,6 +13,7 @@ import {
 import {
     addTotalTable
 } from "./add-total-table";
+import { filterProducts } from "./filter";
 
 const addProductBtn = document.querySelector('[data-add-product]');
 const currentDate = document.querySelector('[data-current-date]');
@@ -27,6 +28,7 @@ const currentTableContainer = document.querySelector('[data-current-table-body]'
 const kcalTableHead = document.querySelector('[data-head-kcal]');
 const limit = localStorage.getItem('CaloriesLimit');
 const totalTableContainer = document.querySelector('[data-total-table-body]');
+const filterInput = document.querySelector('[data-filter]');
 
 const todayDate = new Date().toISOString().slice(0, 10);
 //Показ лимита калорий
@@ -148,11 +150,11 @@ kcalTableHead.addEventListener('click', (e) => {
     if (order == 'desc') {
         target.dataset.order = 'asc';
         data = dataArr.sort((a, b) => parseInt(a.kcal) > parseInt(b.kcal) ? 1 : -1);
-        text += '&#9660';
+        text += '&#9660;';
     } else {
         target.dataset.order = 'desc';
         data = dataArr.sort((a, b) => parseInt(a.kcal) < parseInt(b.kcal) ? 1 : -1);
-        text += '&#9650';
+        text += '&#9650;';
     }
 
     currentTableContainer.innerHTML = '';
@@ -162,6 +164,12 @@ kcalTableHead.addEventListener('click', (e) => {
     });
 
     target.innerHTML = text;
+});
+
+//Фильтр продуктов по названию
+filterInput.addEventListener('keyup', (e) => {
+    const target = e.target;
+    filterProducts(target);
 });
 
 //Уведомление о превышении лимита калорий
